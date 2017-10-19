@@ -4,6 +4,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MdCardModule, MdButtonModule, MdToolbarModule, MdListModule ,MdInputModule, MdIconModule, MatSidenavModule } from '@angular/material';
 import { MatSelectModule } from '@angular/material';
+import { FlexLayoutModule } from "@angular/flex-layout";
+
+
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { MainComponent } from './main/main.component';
@@ -32,7 +35,8 @@ import { AppRoutingModule } from "./app-routing.module";
     MdIconModule,
     MatSidenavModule,
     RouterModule,
-    MdListModule
+    MdListModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
