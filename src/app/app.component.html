@@ -3,12 +3,18 @@
         <md-toolbar color="primary">
             Options
         </md-toolbar>
+        <md-nav-list>
+            <a md-list-item (click)="sidenav.toggle()" [routerLink]="['/']">All Posts</a>
+            <a md-list-item (click)="sidenav.toggle()" [routerLink]="['/myposts']">My Posts</a>
+            <hr>
+            <a md-list-item (click)="sidenav.toggle()" >Signin</a>
+        </md-nav-list>
     </md-sidenav>
     <md-toolbar color="primary">
-            <button md-icon-button (click)="sidenav.toggle()">
-                <md-icon>menu</md-icon>
-            </button>
-        Quick Chat       
+        <button md-icon-button (click)="sidenav.toggle()">
+            <md-icon>menu</md-icon>
+        </button>
+        Quick Chat
     </md-toolbar>
     <router-outlet></router-outlet>
 </md-sidenav-container>

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MdCardModule, MdButtonModule, MdToolbarModule, MdInputModule, MdIconModule, MatSidenavModule } from '@angular/material';
+import { MdCardModule, MdButtonModule, MdToolbarModule, MdListModule ,MdInputModule, MdIconModule, MatSidenavModule } from '@angular/material';
 import { MatSelectModule } from '@angular/material';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
@@ -31,7 +31,8 @@ import { AppRoutingModule } from "./app-routing.module";
     FormsModule,
     MdIconModule,
     MatSidenavModule,
-    RouterModule
+    RouterModule,
+    MdListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
