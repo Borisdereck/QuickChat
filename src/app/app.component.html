@@ -11,7 +11,7 @@
         </md-nav-list>
     </md-sidenav>
     <md-toolbar color="primary">
-        <button md-icon-button (click)="sidenav.toggle()">
+        <button md-icon-button *ngIf="AuthService.isSignedInStream | async" (click)="sidenav.toggle()">
             <md-icon>menu</md-icon>
         </button>
         Quick Chat

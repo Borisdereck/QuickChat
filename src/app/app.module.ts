@@ -11,6 +11,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 
 // Servicio
 import { AuthService } from './services/auth.service';
+import { AuthguardService } from "./services/authguard.service";
 
 
 import { AppComponent } from './app.component';
@@ -20,6 +21,7 @@ import { MypostsComponent } from './myposts/myposts.component';
 import { SigninComponent } from './signin/signin.component';
 
 import { AppRoutingModule } from "./app-routing.module";
+
 
 export const firebaseConfig = {
   apiKey: "AIzaSyArsiCgzbgDVGYXJAjC68iDuyKNo855IiM",
@@ -35,7 +37,8 @@ export const firebaseConfig = {
     AppComponent,
     MainComponent,
     MypostsComponent,
-    SigninComponent
+    SigninComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,7 @@ export const firebaseConfig = {
     FlexLayoutModule  
 
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthguardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
