@@ -6,9 +6,11 @@ import * as firebase from 'firebase/app';
 
 @Injectable()
 export class AuthService {
+
   public isSignedInStream: Observable<boolean>;
   public displayName: string;
   public photoUrl: string;
+  public _currentUsersUid: string;
 //  private _isSignedIn: boolean;
 
   constructor(private afAuth: AngularFireAuth, private router: Router) {
@@ -17,12 +19,14 @@ export class AuthService {
         console.log('User is Signin as ', user);
         this.displayName = user.displayName;
         this.photoUrl = user.photoURL;
+        this._currentUsersUid = user.uid;
         // this._isSignedIn = true;
       } else {
         console.log('User is not Signin in ');
         // this._isSignedIn = false;
         this.displayName = '';
         this.photoUrl = '';
+        this._currentUsersUid = '';
       }
     });
     this.isSignedInStream = this.afAuth.authState.map<firebase.User, boolean>((user: firebase.User) => {
@@ -34,6 +38,10 @@ export class AuthService {
   //   return this._isSignedIn;
   // }
 
+    get currentId(): string{
+      return this._currentUsersUid;
+    }
+
   signInWithGoogle(): void{
     this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then((user: firebase.User) => {
       this.router.navigate(['/'])
@@ -43,7 +51,6 @@ export class AuthService {
   signOut(): void{
     this.afAuth.auth.signOut();
     this.router.navigate(['/signin']);
-
   }
 
 }
