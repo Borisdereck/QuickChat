@@ -6,17 +6,20 @@ import * as firebase from 'firebase/app';
 
 @Injectable()
 export class AuthService {
-  public isSignedInStream: Observable<boolean>
+  public isSignedInStream: Observable<boolean>;
+  public displayName: string;
 //  private _isSignedIn: boolean;
 
   constructor(private afAuth: AngularFireAuth, private router: Router) {
     this.afAuth.authState.subscribe((user: firebase.User) => {
       if (user) {
         console.log('User is Signin as ', user);
+        this.displayName = user.displayName;
         // this._isSignedIn = true;
       } else {
         console.log('User is not Signin in ');
         // this._isSignedIn = false;
+        this.displayName = '';
       }
     });
     this.isSignedInStream = this.afAuth.authState.map<firebase.User, boolean>((user: firebase.User) => {
