@@ -7,7 +7,7 @@
             <a md-list-item (click)="sidenav.toggle()" [routerLink]="['/']">All Posts</a>
             <a md-list-item (click)="sidenav.toggle()" [routerLink]="['/myposts']">My Posts</a>
             <hr>
-            <a md-list-item (click)="sidenav.toggle()" >Signin</a>
+            <a md-list-item (click)="sidenav.toggle();AuthService.signOut()">Sign Out</a>
         </md-nav-list>
     </md-sidenav>
     <md-toolbar color="primary">

@@ -1,3 +1,6 @@
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
@@ -5,6 +8,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MdCardModule, MdButtonModule, MdToolbarModule, MdListModule ,MdInputModule, MdIconModule, MatSidenavModule } from '@angular/material';
 import { MatSelectModule } from '@angular/material';
 import { FlexLayoutModule } from "@angular/flex-layout";
+
+// Servicio
+import { AuthService } from './services/auth.service';
 
 
 import { AppComponent } from './app.component';
@@ -14,6 +20,15 @@ import { MypostsComponent } from './myposts/myposts.component';
 import { SigninComponent } from './signin/signin.component';
 
 import { AppRoutingModule } from "./app-routing.module";
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyArsiCgzbgDVGYXJAjC68iDuyKNo855IiM",
+  authDomain: "quick-chat-5737d.firebaseapp.com",
+  databaseURL: "https://quick-chat-5737d.firebaseio.com",
+  projectId: "quick-chat-5737d",
+  storageBucket: "quick-chat-5737d.appspot.com",
+  messagingSenderId: "257869878276"
+};
 
 @NgModule({
   declarations: [
@@ -25,6 +40,9 @@ import { AppRoutingModule } from "./app-routing.module";
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
     BrowserAnimationsModule,
     MdCardModule,
     MdButtonModule,
@@ -36,9 +54,10 @@ import { AppRoutingModule } from "./app-routing.module";
     MatSidenavModule,
     RouterModule,
     MdListModule,
-    FlexLayoutModule
+    FlexLayoutModule  
+
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 // import { MdCardModule, MdButtonModule, MdToolbarModule, MdInputModule, MdIconModule, MatSidenavModule } from '@angular/material';
-
+import { AuthService } from "./services/auth.service";
 
 @Component({
   selector: 'amte-root',
@@ -9,5 +9,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'amte';
+
+  constructor(public AuthService: AuthService){}
+
+  ngOnInit() {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    
+  }
   
 }
