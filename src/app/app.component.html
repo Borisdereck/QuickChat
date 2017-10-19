@@ -16,8 +16,12 @@
         </button>
         Quick Chat
         <span fxFlex></span>
-            {{AuthService.displayName}}
-        
+        {{AuthService.displayName}}
+
     </md-toolbar>
-    <router-outlet></router-outlet>
+    <div fxLayoutALign="center center">
+        <div class="container" class.gt.xs="container-extra-padding" fxFlex fxFlex.md="960px" flex.gt.md="1100px" >
+            <router-outlet></router-outlet>
+        </div>
+    </div>
 </md-sidenav-container>

@@ -1,0 +1,9 @@
+<md-card fxLayout="row">
+  <img *ngIf="authService.photoUrl as photoUrl;else noPhotoTemplate" [src]="photoUrl" alt="Google profile Photo">
+  <ng-template #noPhotoTemplate>
+    <img src="/assets/images/missing_photo.png" alt="Missing Photo">
+  </ng-template>
+  <md-input-container>
+    <input mdInput placeholder="Make a Post" required>
+  </md-input-container>
+</md-card>

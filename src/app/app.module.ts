@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MdCardModule, MdButtonModule, MdToolbarModule, MdListModule ,MdInputModule, MdIconModule, MatSidenavModule } from '@angular/material';
+import { MdCardModule, MdButtonModule, MdToolbarModule, MdListModule, MdInputModule, MdIconModule, MatSidenavModule, MatCardModule } from '@angular/material';
 import { MatSelectModule } from '@angular/material';
 import { FlexLayoutModule } from "@angular/flex-layout";
 
@@ -21,6 +21,9 @@ import { MypostsComponent } from './myposts/myposts.component';
 import { SigninComponent } from './signin/signin.component';
 
 import { AppRoutingModule } from "./app-routing.module";
+import { CreatepostComponent } from './services/createpost/createpost.component';
+import { PostlistComponent } from './services/postlist/postlist.component';
+import { PostComponent } from './services/post/post.component';
 
 
 export const firebaseConfig = {
@@ -38,6 +41,9 @@ export const firebaseConfig = {
     MainComponent,
     MypostsComponent,
     SigninComponent,
+    CreatepostComponent,
+    PostlistComponent,
+    PostComponent,
     
   ],
   imports: [
@@ -57,7 +63,8 @@ export const firebaseConfig = {
     MatSidenavModule,
     RouterModule,
     MdListModule,
-    FlexLayoutModule  
+    FlexLayoutModule,
+    MatCardModule 
 
   ],
   providers: [AuthService, AuthguardService],
