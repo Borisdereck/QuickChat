@@ -9,9 +9,10 @@ import { MdCardModule, MdButtonModule, MdToolbarModule, MdListModule, MdInputMod
 import { MatSelectModule } from '@angular/material';
 import { FlexLayoutModule } from "@angular/flex-layout";
 
-// Servicio
+// Services
 import { AuthService } from './services/auth.service';
 import { AuthguardService } from "./services/authguard.service";
+import { PostService } from './services/post.service';
 
 
 import { AppComponent } from './app.component';
@@ -67,7 +68,7 @@ export const firebaseConfig = {
     MatCardModule 
 
   ],
-  providers: [AuthService, AuthguardService],
+  providers: [AuthService, AuthguardService, PostService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,3 +1,4 @@
+import { PostService } from './../post.service';
 import { Post } from './../../model/post';
 import { AuthService } from './../auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -11,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
 export class CreatepostComponent implements OnInit {
   public postBodyText: string;
 
-  constructor(public authService: AuthService) { }
+  constructor(public authService: AuthService, private PostService: PostService) { }
 
   ngOnInit() {
   }
@@ -22,7 +23,8 @@ export class CreatepostComponent implements OnInit {
         body: this.postBodyText,
         autherKey: this.authService._currentUsersUid,
       });
-      console.log('TODO: ',post);   
+      // console.log('TODO: ',post);   
+      this.PostService.add(post);
       this.postBodyText = '';
 
     } catch (error) {
