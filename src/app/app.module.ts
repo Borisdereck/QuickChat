@@ -1,3 +1,4 @@
+import { AuthorService } from './services/author.service';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -73,7 +74,11 @@ export const firebaseConfig = {
      
 
   ],
-  providers: [AuthService, AuthguardService, PostService],
+  providers: [AuthService, 
+    AuthguardService, 
+    PostService,
+    AuthorService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

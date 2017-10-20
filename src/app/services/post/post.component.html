@@ -2,7 +2,7 @@
 
   <img id="create-post" md-card-avatar *ngIf="post.photoUrl as photoUrl;else noPhotoTemplate" [src]="photoUrl" alt="Google profile Photo">
   <ng-template #noPhotoTemplate>
-    <img src="/assets/images/missing_photo.png" alt="Missing Photo">
+    <img md-card-avatar src="/assets/images/missing_photo.png" alt="Missing Photo">
   </ng-template>
 
   <!-- <img src="/assets/images/missing_photo.png" alt="Missing Photo"> -->

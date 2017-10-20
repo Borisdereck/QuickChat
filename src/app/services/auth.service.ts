@@ -1,3 +1,4 @@
+import { AuthorService } from './author.service';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
@@ -13,7 +14,7 @@ export class AuthService {
   public _currentUsersUid: string;
 //  private _isSignedIn: boolean;
 
-  constructor(private afAuth: AngularFireAuth, private router: Router) {
+  constructor(private afAuth: AngularFireAuth, private AuthorService: AuthorService, private router: Router) {
     this.afAuth.authState.subscribe((user: firebase.User) => {
       if (user) {
         console.log('User is Signin as ', user);
@@ -43,8 +44,11 @@ export class AuthService {
     }
 
   signInWithGoogle(): void{
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then((user: firebase.User) => {
-      this.router.navigate(['/'])
+    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then((result: any) => {
+      this.router.navigate(['/']);
+      const user: firebase.User = result.user; 
+      console.log('Push the user to the database', user);
+      this.AuthorService.updateAuthor(user.uid, user.displayName, user.photoURL);
     });
   }
 
