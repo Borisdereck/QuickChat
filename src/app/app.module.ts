@@ -26,6 +26,10 @@ import { CreatepostComponent } from './services/createpost/createpost.component'
 import { PostlistComponent } from './services/postlist/postlist.component';
 import { PostComponent } from './services/post/post.component';
 
+// pipes
+import { ReversePipe } from "./pipes/reverse.pipe";
+
+
 
 export const firebaseConfig = {
   apiKey: "AIzaSyArsiCgzbgDVGYXJAjC68iDuyKNo855IiM",
@@ -45,7 +49,7 @@ export const firebaseConfig = {
     CreatepostComponent,
     PostlistComponent,
     PostComponent,
-    
+    ReversePipe
   ],
   imports: [
     BrowserModule,
@@ -65,7 +69,8 @@ export const firebaseConfig = {
     RouterModule,
     MdListModule,
     FlexLayoutModule,
-    MatCardModule 
+    MatCardModule
+     
 
   ],
   providers: [AuthService, AuthguardService, PostService],

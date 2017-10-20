@@ -1,6 +1,6 @@
 <md-card fxLayout="column" fxLayoutAlign="none stretch">
-  <app-post></app-post>
-  <app-post></app-post>
-  <app-post></app-post>
-  
+  <div *ngFor="let post of postService.items | async | reverse">
+    <app-post [post]="post"></app-post>
+    <hr>
+  </div>
 </md-card>
