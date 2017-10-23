@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "Dereck",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

@@ -22,6 +22,8 @@ export class CreatepostComponent implements OnInit {
       const post = new Post({
         body: this.postBodyText,
         autherKey: this.authService._currentUsersUid,
+        name: this.authService.displayName,
+        photo: this.authService.photoUrl
       });
       // console.log('TODO: ',post);   
       this.PostService.add(post);
