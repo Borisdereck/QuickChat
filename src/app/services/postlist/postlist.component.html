@@ -1,6 +1,9 @@
 <md-card fxLayout="column" fxLayoutAlign="none stretch">
-  <div *ngFor="let post of postService.items | async | reverse">
-    <app-post [post]="post"></app-post>
+  <div *ngFor="let postWhitAuthor of postService.postWhitAuthorStream | async | reverse">
+    <app-post [postWhitAuthor]="postWhitAuthor"></app-post>
     <hr>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="end center">
+    <button md-raised-button color="primary" (click)="postService.displayMorePost()">Load More.!</button>
   </div>
 </md-card>

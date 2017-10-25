@@ -1,7 +1,8 @@
 import { AuthorService } from './author.service';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from "rxjs/Observable";
+import 'rxjs/add/operator/map';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
@@ -12,13 +13,15 @@ export class AuthService {
   public displayName: string;
   public photoUrl: string;
   public _currentUsersUid: string;
+  public name: string[];
 //  private _isSignedIn: boolean;
 
   constructor(private afAuth: AngularFireAuth, private AuthorService: AuthorService, private router: Router) {
     this.afAuth.authState.subscribe((user: firebase.User) => {
       if (user) {
         console.log('User is Signin as ', user);
-        this.displayName = user.displayName;
+        this.name = user.displayName.split(" ", 1);
+        this.displayName =   this.name[0];
         this.photoUrl = user.photoURL;
         this._currentUsersUid = user.uid;
         // this._isSignedIn = true;
@@ -30,7 +33,8 @@ export class AuthService {
         this._currentUsersUid = '';
       }
     });
-    this.isSignedInStream = this.afAuth.authState.map<firebase.User, boolean>((user: firebase.User) => {
+    this.isSignedInStream = this.afAuth.authState
+    .map<firebase.User, boolean>((user: firebase.User) => {
       return user != null;
     }) ; 
   }
@@ -44,7 +48,8 @@ export class AuthService {
     }
 
   signInWithGoogle(): void{
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then((result: any) => {
+    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
+    .then((result: any) => {
       this.router.navigate(['/']);
       const user: firebase.User = result.user; 
       console.log('Push the user to the database', user);

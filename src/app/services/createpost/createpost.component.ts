@@ -20,13 +20,13 @@ export class CreatepostComponent implements OnInit {
 
   onsubmit(): void {
     // Nombre Corto para el label del author
-    let nameShort: string[] = this.authService.displayName.split(" ", 1);
+    // let nameShort: string[] = this.authService.displayName.split(" ", 1);
 
     try {
       const post = new Post({
         body: this.postBodyText,
         autherKey: this.authService._currentUsersUid,
-        name: nameShort[0],
+        name: this.authService.displayName,
         photo: this.authService.photoUrl
       });
       // console.log('TODO: ',post);   

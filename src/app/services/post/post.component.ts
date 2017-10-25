@@ -1,7 +1,7 @@
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AuthService } from './../auth.service';
 import { PostService } from './../post.service';
-import { Post } from './../../model/post';
+import { Post, PostWithAuthor } from './../../model/post';
 import { Component, OnInit, Input } from '@angular/core';
 import { MdSnackBar } from '@angular/material';
 
@@ -19,7 +19,7 @@ enum EditMode {
 })
 export class PostComponent implements OnInit {
 
-  @Input() post: Post;
+  @Input() postWhitAuthor: PostWithAuthor;
   public editingMode = EditMode.displayEditButton;
 
   constructor(public authService: AuthService,
@@ -38,24 +38,24 @@ export class PostComponent implements OnInit {
   }
 
   remove(autherKey): void {
-     let undo: boolean = false ;
+    let undo: boolean = false;
     console.log("Delete: Done.!!");
     this.PostService.remove(autherKey);
     const snackRef = this.snackBar.open("Post Removed", "UNDO", {
       duration: 3000,
     });
 
-    snackRef.onAction().subscribe(() => {      
+    snackRef.onAction().subscribe(() => {
       console.log("User CLicked in UNDO");
       this.snackBar.open("Post Restored", "", {
         duration: 3000,
       });
-      
+
     });
 
-    
-     
-    
+
+
+
   }
 
 }

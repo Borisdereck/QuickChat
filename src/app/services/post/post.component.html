@@ -1,21 +1,21 @@
 <div class="post" fxLayout="row" fxLayoutAlign="none stretch">
 
-  <img id="create-post" md-card-avatar *ngIf="post.photo as photoUrl;else noPhotoTemplate" [src]="photoUrl" alt="Google profile Photo">
+  <img id="create-post" md-card-avatar *ngIf="postWhitAuthor.author.photoUrl as photoUrl;else noPhotoTemplate" [src]="photoUrl" alt="Google profile Photo">
   <ng-template #noPhotoTemplate>
     <img md-card-avatar src="/assets/images/missing_photo.png" alt="Missing Photo">
   </ng-template>
 
   <!-- <img src="/assets/images/missing_photo.png" alt="Missing Photo"> -->
   <div fxFLex fxLayout="column">
-    <div class="author-name" fxFlex>{{post.name}}</div>
-    <div class="post-body" fxFlex>{{post.body}}</div>
+    <div class="author-name" fxFlex>{{postWhitAuthor.author.diplayName}}</div>
+    <div class="post-body" fxFlex>{{postWhitAuthor.body}}</div>
   </div>
   <span fxFlex></span>
   <div fxLayout="row" *ngIf="editingMode == 1">
     <button md-icon-button (click)="enableEditing()">
       <i class="material-icons">edit</i>
     </button>
-    <button md-icon-button (click)="remove(post.autherKey)">
+    <button md-icon-button (click)="remove()">
       <i class="material-icons">delete</i>
     </button>
   </div>
