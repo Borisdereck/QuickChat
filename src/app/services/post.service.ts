@@ -22,6 +22,8 @@ export class PostService {
   postWhitAuthorStream: Observable<PostWithAuthor[]>;
   private postIncrementSteam: Subject<number>;
 
+  public hideLoadMoreBtn = false;
+
   constructor(private db: AngularFireDatabase,
     public AuthService: AuthService,
     private authorService: AuthorService) {
@@ -48,8 +50,10 @@ export class PostService {
     this.postWhitAuthorStream = Observable.combineLatest<PostWithAuthor[]>(
       postStream,
       this.authorService.authorMapStream,
-      (posts: Post[], authorMap: Map<string, Author[]>) => {
+      numPostStream,
+      (posts: Post[], authorMap: Map<string, Author[]>, numPostsRequested: number) => {
         const postsWhitAuthor: PostWithAuthor[] = [];
+        this.hideLoadMoreBtn = numPostsRequested > posts.length;
         for (let post of posts) {
           const postWithAuthor = new PostWithAuthor(post);
           postWithAuthor.author = authorMap[post.autherKey];
@@ -70,10 +74,12 @@ export class PostService {
     firebase.database().ref().child(this.postPath).push(post);
   }
 
-  remove(itemRemove: string): void {
-    itemRemove = "ooajhiv";
-    this._postsStream.remove(itemRemove);
-    // console.log(itemRemove);
+  remove(keyToRemove: string): void {
+    this.db.object(`/${this.postPath}/${keyToRemove}`).remove();
+    // firebase.database().ref(`/${this.postPath}/${keyToRemove}`).remove();
+    // firebase.database().ref().child(this.postPath).child(keyToRemove).remove();
+
+   
   }
 
   displayMorePost() {

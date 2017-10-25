@@ -3,7 +3,7 @@
     <app-post [postWhitAuthor]="postWhitAuthor"></app-post>
     <hr>
   </div>
-  <div fxLayout="row" fxLayoutAlign="end center">
+  <div fxLayout="row" fxLayoutAlign="end center" *ngIf="!postService.hideLoadMoreBtn">
     <button md-raised-button color="primary" (click)="postService.displayMorePost()">Load More.!</button>
   </div>
 </md-card>

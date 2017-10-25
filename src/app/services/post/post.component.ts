@@ -20,17 +20,20 @@ enum EditMode {
 export class PostComponent implements OnInit {
 
   @Input() postWhitAuthor: PostWithAuthor;
-  public editingMode = EditMode.displayEditButton;
+  public editingMode = EditMode.notEditable;
 
   constructor(public authService: AuthService,
     public PostService: PostService,
     public firebase: AngularFireDatabase,
     public snackBar: MdSnackBar
   ) {
-
+    // this.editingMode = EditMode.displayEditButton;
   }
 
   ngOnInit() {
+    if (this.postWhitAuthor.autherKey == this.authService._currentUsersUid) {
+      this.editingMode = EditMode.displayEditButton;
+    }
   }
 
   enableEditing() {
@@ -40,11 +43,14 @@ export class PostComponent implements OnInit {
   remove(autherKey): void {
     let undo: boolean = false;
     console.log("Delete: Done.!!");
-    this.PostService.remove(autherKey);
+    this.PostService.remove(this.postWhitAuthor.$key);
+    
+    // Show the SnackBar Post Removed
     const snackRef = this.snackBar.open("Post Removed", "UNDO", {
-      duration: 3000,
+      duration: 4000,
     });
 
+    // Show the SnackBar Post Restored
     snackRef.onAction().subscribe(() => {
       console.log("User CLicked in UNDO");
       this.snackBar.open("Post Restored", "", {
@@ -52,9 +58,6 @@ export class PostComponent implements OnInit {
       });
 
     });
-
-
-
 
   }
 
