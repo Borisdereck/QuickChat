@@ -77,13 +77,16 @@ export class PostService {
   remove(keyToRemove: string): void {
     this.db.object(`/${this.postPath}/${keyToRemove}`).remove();
     // firebase.database().ref(`/${this.postPath}/${keyToRemove}`).remove();
-    // firebase.database().ref().child(this.postPath).child(keyToRemove).remove();
-
-   
+    // firebase.database().ref().child(this.postPath).child(keyToRemove).remove();   
   }
 
   displayMorePost() {
     this.postIncrementSteam.next(this.postBatchSize);
+  }
+
+  update(key: string, post: Post){
+    firebase.database().ref(`/${this.postPath}/${key}`).set(post);
+    // this.db.object(`/${this.postPath}/${key}`).set();
   }
 
 

@@ -52,7 +52,10 @@ export class PostComponent implements OnInit {
 
     // Show the SnackBar Post Restored
     snackRef.onAction().subscribe(() => {
-      console.log("User CLicked in UNDO");
+      const restorepost = new Post();
+      restorepost.body = this.postWhitAuthor.body;
+      restorepost.autherKey = this.authService.currentId;
+      this.PostService.update(this.postWhitAuthor.$key, restorepost);
       this.snackBar.open("Post Restored", "", {
         duration: 3000,
       });
