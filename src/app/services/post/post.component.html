@@ -10,4 +10,13 @@
     <div class="author-name" fxFlex>{{post.name}}</div>
     <div class="post-body" fxFlex>{{post.body}}</div>
   </div>
+  <span fxFlex></span>
+  <div fxLayout="row" *ngIf="editingMode == 1">
+    <button md-icon-button (click)="enableEditing()">
+      <i class="material-icons">edit</i>
+    </button>
+    <button md-icon-button (click)="remove(post.autherKey)">
+      <i class="material-icons">delete</i>
+    </button>
+  </div>
 </div>
