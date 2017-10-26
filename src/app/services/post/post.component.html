@@ -9,17 +9,17 @@
   <!-- <img src="/assets/images/missing_photo.png" alt="Missing Photo"> -->
   <div fxFLex fxLayout="column">
     <div class="author-name" fxFlex>{{postWhitAuthor.author.diplayName}}</div>
-    <div *ngIf="editingMode != 2;else editingModeTemplate" class="post-body" fxFlex>{{postWhitAuthor.body}}</div>
-    <ng-template #editingModeTemplate> 
-      <md-input-container divider-color="accent">
-        <input mdInput type="text" placeholder="Edit your Post" (keyup.enter)="save()"
-        [(ngModel)]="updatePostBody" name="updatePostBody">
-      </md-input-container>    
-    </ng-template>
+    <div *ngIf="editingMode != 2" class="post-body" fxFlex>{{postWhitAuthor.body}}</div>
+
+    <md-input-container [class.hide]="editingMode != 2" divider-color="accent">
+      <input #updateInputEl mdInput type="text" placeholder="Edit your Post" (keyup.enter)="save()" [(ngModel)]="updatePostBody"
+        name="updatePostBody">
+    </md-input-container>
+
   </div>
   <span fxFlex></span>
   <div fxLayout="row" *ngIf="editingMode == 1">
-    <button md-icon-button (click)="enableEditing()">
+    <button md-icon-button (click)="enableEditing(updateInputEl)">
       <i class="material-icons">edit</i>
     </button>
     <button md-icon-button (click)="remove()">

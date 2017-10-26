@@ -31,15 +31,18 @@ export class PostComponent implements OnInit {
 
   ngOnInit() {
     if (this.postWhitAuthor.autherKey == this.authService._currentUsersUid) {
-      this.editingMode = EditMode.displayEditButton;
+      this.editingMode = EditMode.displayEditButton;     
     }
   }
 
   // Edit Post
-  enableEditing() {
+  enableEditing(inputEl: HTMLInputElement) {
     console.log("Enable activate.!!");
     this.editingMode = EditMode.editing;
     this.updatePostBody = this.postWhitAuthor.body;
+    setTimeout(() =>{
+      inputEl.focus();
+    },100);
   }
 
   // Remove PPOst
