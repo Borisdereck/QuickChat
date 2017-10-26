@@ -12,7 +12,8 @@
     <div *ngIf="editingMode != 2;else editingModeTemplate" class="post-body" fxFlex>{{postWhitAuthor.body}}</div>
     <ng-template #editingModeTemplate> 
       <md-input-container divider-color="accent">
-        <input mdInput type="text" placeholder="Edit your Post" [(ngModel)]="updatePostBody" name="updatePostBody">
+        <input mdInput type="text" placeholder="Edit your Post" (keyup.enter)="save()"
+        [(ngModel)]="updatePostBody" name="updatePostBody">
       </md-input-container>    
     </ng-template>
   </div>
@@ -26,7 +27,7 @@
     </button>
   </div>
   <div fxLayout="row" *ngIf="editingMode == 2">
-    <button md-icon-button (click)="save()">
+    <button [disabled]="updatePostBody==postWhitAuthor.body" md-icon-button (click)="save()">
       <i class="material-icons">save</i>
     </button>
     <button md-icon-button (click)="cancel()">
