@@ -20,11 +20,10 @@ enum EditMode {
 export class PostComponent implements OnInit {
 
   @Input() postWhitAuthor: PostWithAuthor;
-  public editingMode = EditMode.notEditable;
+  editingMode = EditMode.notEditable;
+  updatePostBody: string; 
 
-  constructor(public authService: AuthService,
-    public PostService: PostService,
-    public firebase: AngularFireDatabase,
+  constructor(public authService: AuthService, public PostService: PostService, public firebase: AngularFireDatabase,
     public snackBar: MdSnackBar
   ) {
     // this.editingMode = EditMode.displayEditButton;
@@ -36,15 +35,19 @@ export class PostComponent implements OnInit {
     }
   }
 
+  // Edit Post
   enableEditing() {
     console.log("Enable activate.!!");
+    this.editingMode = EditMode.editing;
+    this.updatePostBody = this.postWhitAuthor.body;
   }
 
+  // Remove PPOst
   remove(autherKey): void {
     let undo: boolean = false;
     console.log("Delete: Done.!!");
     this.PostService.remove(this.postWhitAuthor.$key);
-    
+
     // Show the SnackBar Post Removed
     const snackRef = this.snackBar.open("Post Removed", "UNDO", {
       duration: 4000,
@@ -59,9 +62,20 @@ export class PostComponent implements OnInit {
       this.snackBar.open("Post Restored", "", {
         duration: 3000,
       });
-
     });
+  }
 
+  save(): void {
+    console.log("Save the Change to.", this.updatePostBody);
+    const updatedPost =new Post();
+    updatedPost.body = this.updatePostBody;
+    updatedPost.autherKey = this.authService.currentId;
+    this.PostService.update(this.postWhitAuthor.$key, updatedPost);
+    this.editingMode = EditMode.displayEditButton;
+  }
+
+  cancel(): void {
+    this.editingMode = EditMode.displayEditButton;
   }
 
 }

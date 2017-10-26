@@ -1,6 +1,7 @@
 <div class="post" fxLayout="row" fxLayoutAlign="none stretch">
 
-  <img id="create-post" md-card-avatar *ngIf="postWhitAuthor.author.photoUrl as photoUrl;else noPhotoTemplate" [src]="photoUrl" alt="Google profile Photo">
+  <img id="create-post" md-card-avatar *ngIf="postWhitAuthor.author.photoUrl as photoUrl;else noPhotoTemplate" [src]="photoUrl"
+    alt="Google profile Photo">
   <ng-template #noPhotoTemplate>
     <img md-card-avatar src="/assets/images/missing_photo.png" alt="Missing Photo">
   </ng-template>
@@ -8,7 +9,12 @@
   <!-- <img src="/assets/images/missing_photo.png" alt="Missing Photo"> -->
   <div fxFLex fxLayout="column">
     <div class="author-name" fxFlex>{{postWhitAuthor.author.diplayName}}</div>
-    <div class="post-body" fxFlex>{{postWhitAuthor.body}}</div>
+    <div *ngIf="editingMode != 2;else editingModeTemplate" class="post-body" fxFlex>{{postWhitAuthor.body}}</div>
+    <ng-template #editingModeTemplate> 
+      <md-input-container divider-color="accent">
+        <input mdInput type="text" placeholder="Edit your Post" [(ngModel)]="updatePostBody" name="updatePostBody">
+      </md-input-container>    
+    </ng-template>
   </div>
   <span fxFlex></span>
   <div fxLayout="row" *ngIf="editingMode == 1">
@@ -17,6 +23,14 @@
     </button>
     <button md-icon-button (click)="remove()">
       <i class="material-icons">delete</i>
+    </button>
+  </div>
+  <div fxLayout="row" *ngIf="editingMode == 2">
+    <button md-icon-button (click)="save()">
+      <i class="material-icons">save</i>
+    </button>
+    <button md-icon-button (click)="cancel()">
+      <i class="material-icons">cancel</i>
     </button>
   </div>
 </div>
