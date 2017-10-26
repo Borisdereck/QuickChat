@@ -2,12 +2,26 @@
     <md-sidenav #sidenav>
         <md-toolbar color="primary">
             Options
+            <span fxFlex></span>
+            <i class="material-icons">settings</i>
+
         </md-toolbar>
         <md-nav-list>
-            <a md-list-item (click)="sidenav.toggle()" [routerLink]="['/']">All Posts</a>
-            <a md-list-item (click)="sidenav.toggle()" [routerLink]="['/myposts']">My Posts</a>
+            <a md-list-item (click)="sidenav.toggle()" [routerLink]="['/']">All Posts
+                <span fxFlex></span>
+                <i class="material-icons">done_all</i>
+
+            </a>
+            <a md-list-item (click)="sidenav.toggle()" [routerLink]="['/myposts']">My Posts
+                <span fxFlex></span>
+                <i class="material-icons">face</i>
+
+            </a>
             <hr>
-            <a md-list-item (click)="sidenav.toggle();AuthService.signOut()">Sign Out</a>
+            <a md-list-item (click)="sidenav.toggle();AuthService.signOut()">Sign Out
+                <span fxFlex></span>
+                <i class="material-icons">power_settings_new</i>
+            </a>
         </md-nav-list>
     </md-sidenav>
     <md-toolbar color="primary">
@@ -20,7 +34,7 @@
 
     </md-toolbar>
     <div fxLayoutALign="center center">
-        <div class="container" class.gt.xs="container-extra-padding" fxFlex fxFlex.md="960px" flex.gt.md="1100px" >
+        <div class="container" class.gt.xs="container-extra-padding" fxFlex fxFlex.md="960px" flex.gt.md="1100px">
             <router-outlet></router-outlet>
         </div>
     </div>
