@@ -69,7 +69,7 @@ export class PostComponent implements OnInit {
   }
 
   save(): void {
-    console.log("Save the Change to.", this.updatePostBody);
+    // console.log("Save the Change to.", this.updatePostBody);
     const updatedPost =new Post();
     updatedPost.body = this.updatePostBody;
     updatedPost.autherKey = this.authService.currentId;

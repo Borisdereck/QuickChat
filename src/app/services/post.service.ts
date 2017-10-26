@@ -12,6 +12,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/switchMap'
 
 import * as firebase from 'firebase/app';
+import { Query } from 'angularfire2/database/interfaces';
 
 @Injectable()
 export class PostService {
@@ -21,24 +22,43 @@ export class PostService {
   // items: Observable<any[]>;
   postWhitAuthorStream: Observable<PostWithAuthor[]>;
   private postIncrementSteam: Subject<number>;
+  private isMyPostPageStream: Subject<boolean>;
 
   public hideLoadMoreBtn = false;
 
   constructor(private db: AngularFireDatabase,
     public AuthService: AuthService,
     private authorService: AuthorService) {
+
     this.postIncrementSteam = new BehaviorSubject<number>(this.postBatchSize);
+    this.isMyPostPageStream = new BehaviorSubject<boolean>(false);
     const numPostStream: Observable<number> = this.postIncrementSteam
-    .scan<number>((previousTotal: number, currentValue: number) => {
-      return previousTotal + currentValue;
-    })
-    
-    const postStream: Observable<Post[]> = numPostStream
-      .switchMap<number, Post[]>((numPosts: number) => {
-        return this.db.list(this.postPath, {
-          query: {
-            limitToLast: numPosts,
+      .scan<number>((previousTotal: number, currentValue: number) => {
+        return previousTotal + currentValue;
+      });
+
+    const queryStream: Observable<Query> = Observable.combineLatest<Query>(
+      numPostStream,
+      this.isMyPostPageStream,
+      (numPost: number, isMyPostPage: boolean) => {
+        if (isMyPostPage) {
+          return {
+            orderByChild: 'autherKey',
+            equalTo: this.AuthService.currentId,
+
           }
+        } else {
+          return {
+            limitToLast: numPost,
+          }
+        }
+      }
+    );
+
+    const postStream: Observable<Post[]> = queryStream
+      .switchMap<Query, Post[]>((queryParameter: Query) => {
+        return this.db.list(this.postPath, {
+          query: queryParameter
         });
       });
     // this._postsStream = this.db.list(this.postPath, {
@@ -84,9 +104,13 @@ export class PostService {
     this.postIncrementSteam.next(this.postBatchSize);
   }
 
-  update(key: string, post: Post){
+  update(key: string, post: Post) {
     firebase.database().ref(`/${this.postPath}/${key}`).set(post);
     // this.db.object(`/${this.postPath}/${key}`).set();
+  }
+
+  showOnlyMyPost(isMyPpostPage: boolean): void {
+    this.isMyPostPageStream.next(isMyPpostPage);
   }
 
 
