@@ -3,7 +3,14 @@
     <app-post [postWhitAuthor]="postWhitAuthor"></app-post>
     <hr>
   </div>
-  <div fxLayout="row" fxLayoutAlign="end center" *ngIf="!postService.hideLoadMoreBtn">
-    <button md-raised-button color="primary" (click)="postService.displayMorePost()">Load More.!</button>
+  <div fxLayout="row" fxLayoutAlign="end center" *ngIf="!postService.hideLoadMoreBtn && !(postService.isMyPostPageStream | async)  ">
+    <button md-raised-button color="accent" (click)="postService.displayMorePost()">Load More.!</button>
   </div>
+  <br>
+  <span fxFlex></span>
+  <div>
+    <h5 id="dereck">@Borisdereck</h5>
+  </div>
+ 
+ 
 </md-card>

@@ -6,7 +6,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MdCardModule, MdButtonModule, MdToolbarModule, MdListModule, MdInputModule, MdIconModule, MatSidenavModule, MatCardModule } from '@angular/material';
+import { MdCardModule, MdButtonModule, MatChipsModule ,MdToolbarModule, MdListModule, MdInputModule, MdIconModule, MatSidenavModule, MatCardModule } from '@angular/material';
 import { MatSnackBarModule } from '@angular/material';
 import { MatSelectModule } from '@angular/material';
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -72,7 +72,8 @@ export const firebaseConfig = {
     MdListModule,
     FlexLayoutModule,
     MatCardModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatChipsModule
      
 
   ],

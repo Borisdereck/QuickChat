@@ -1,6 +1,6 @@
 <md-sidenav-container>
     <md-sidenav #sidenav>
-        <md-toolbar color="primary">
+        <md-toolbar color="accent">
             Options
             <span fxFlex></span>
             <i class="material-icons">settings</i>
@@ -30,7 +30,7 @@
         </button>
         Quick Chat
         <span fxFlex></span>
-        {{AuthService.displayName}}
+        @{{AuthService.displayName}}
 
     </md-toolbar>
     <div fxLayoutALign="center center">
